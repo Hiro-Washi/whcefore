@@ -1,0 +1,2 @@
+RuntimeError: Invalid URI is specified.の解決
+-> ccnx:/test

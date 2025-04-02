@@ -1,0 +1,33 @@
+# Win11,WSL
+wsl hostname -I : 192.168.187.79
+ip route | grep default | awk '{print $3}' : 192.168.176.1
+or cat /etc/resolv.conf | grep nameserver : nameserver 192.168.176.1
+
+
+# cefnetd: フォワーディングデーモン
+ps aux | grep cefnetd # cefnetd が起動しているか確認
+cefstatus
+sudo systemctl start cefnetd
+# or
+cefnetd &
+cefroute # FIB操作ユーティリティ
+cefputfile # 任意のファイルをNamed Cobに変換しcefnetdへ⼊⼒する
+cefgetfile # cefnetdを介して取得したコンテンツをファイルとして出⼒する
+cefgetchunk # 指定されたNamed Cobを取得し、ペイロードを標準出⼒する
+cefputstream # 標準⼊⼒をNamed Cobに変換しcefnetdへ⼊⼒する
+cefgetstream # cefnetdを介して取得したコンテンツを標準出⼒する
+
+
+# cefmgrd: コンテンツストア管理デーモン
+csmgrdstart
+csmgrdstop
+csmgrstatus # csmgrdのstatus標準出⼒ユーティリティ
+csmgrecho # csmgr接続確認ツール
+cefping # ネットワーク管理ツールcefping
+
+# cefroute
+
+## Test
+cefroute add /apps/test/test2 tcp  192.168.176.1 -d /home/ot8gr/cefore-0.11.0/config -p 9888
+2025-04-03 04:41:18.280 [cefctrl] ERROR: cef_client_connect (connect:No such file or directory)
+2025-04-03 04:41:18.280 [cefctrl] ERROR: Failed to connect to cefnetd.
