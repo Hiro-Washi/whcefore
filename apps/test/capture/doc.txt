@@ -1,0 +1,26 @@
+推奨ディレクトリ構造:
+
+icn_monitor_tool/
+├── main.py               # ツール実行エントリポイント、引数処理、全体の流れ
+├── config.py             # 定数定義 (ICNポート, プロトコル名など)
+├── packet_analyzer.py    # Pysharkを使ってパケットからICN情報を抽出する機能
+├── stats_collector.py    # 抽出した情報から統計を蓄積・計算するクラス
+├── reporter.py           # 収集した統計を整形して出力する機能
+├── utils.py              # 汎用ユーティリティ関数 (名前正規化など)
+└── captures/             # キャプチャファイルを保存するディレクトリ例
+    └── latest.pcap
+実行コマンド例:
+
+キャプチャファイルを分析する場合:
+Bash
+
+python3 main.py analyze --file captures/some_capture.pcapng
+特定のネットワークインターフェースをライブ監視する場合:
+Bash
+
+sudo python3 main.py live --interface eth0 --duration 60 # 60秒間監視
+(ライブキャプチャには通常root権限が必要です)
+特定の統計項目だけを表示する場合 (拡張機能として):
+Bash
+
+python3 main.py analyze --file captures/some_capture.pcapng --show-stats packet_types,name_frequency

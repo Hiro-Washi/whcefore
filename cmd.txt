@@ -3,6 +3,12 @@ wsl hostname -I : 192.168.187.79
 ip route | grep default | awk '{print $3}' : 192.168.176.1
 or cat /etc/resolv.conf | grep nameserver : nameserver 192.168.176.1
 
+# Tshark
+sudo apt install wireshark tshark
+sudo tshark -D
+tshark -i enp0s31f6 -f "ccnx" -w ts.pcap -a duration:10
+tshark -i wlp0s20f3 -f "ccnx" -w ts.pcap -a duration:10
+tshark -i any -f "ndn" -w ts_ndn.pcap -a duration:10
 
 # cefnetd: フォワーディングデーモン
 ps aux | grep cefnetd # cefnetd が起動しているか確認
@@ -26,6 +32,12 @@ csmgrecho # csmgr接続確認ツール
 cefping # ネットワーク管理ツールcefping
 
 # cefroute
+cefroute add/del [*uri] [*protocol] [*next_IP] [-d config_file_die] [-p port_num]
+  (*は必須パラメータ)
+option	explain	example
+uri	ContentName	ccn:/jp/univercity/todai/
+protocol	protocl	udp
+next_IP	next node IP address	10.0.0.1
 
 ## Test
 cefroute add /apps/test/test2 tcp  192.168.176.1 -d /home/ot8gr/cefore-0.11.0/config -p 9888

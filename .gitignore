@@ -54,5 +54,8 @@ src/csmgrd/csmgrd/csmgrd
 src/csmgrd/csmgrd/.libs/csmgrctrl
 src/csmgrd/csmgrd/.libs/csmgrd
 
+cache/csmgr_fsc_422/.gitignore
+cache/csmgr_fsc_422/0/*
+
 # Configuration for Mac
 .DS_Store
