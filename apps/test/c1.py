@@ -12,7 +12,7 @@ with cefpyco.create_handle() as handle:
     
     send_time = time.time()
     #handle.send_interest(content_name, chunk_num=chunk_num)
-    handle.send_interest("ccnx:/test", 0) 
+    handle.send_interest("ccnx:/test.txt", 0) 
     
     interest_key = (content_name, chunk_num)
     # 同じコンテンツの異なるチャンクに対するInterestパケットの送信回数を別々にカウントしたり、特定のコンテンツ・チャンクに対するInterestパケットの送信時刻を記録

@@ -1,0 +1,1 @@
+uid=1000(otogr) gid=1000(otogr) groups=1000(otogr),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),117(netdev),1001(docker) 合計 4 -rw-r--r-- 1 otogr otogr 796 6月 20 12:57 Dockerfile

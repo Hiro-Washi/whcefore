@@ -1,0 +1,85 @@
+# Ceforeの各ノード（コンシューマー2、ルーター1、プロデューサー1）コンテナを作
+# カスタムネットワークと固定IPアドレスで相互接続
+# Dockerfile: Debian base. Ceforeをビルド・インストール
+# entrypoint.sh: Ceforeデーモンの起動と、各ノード（ルーター、プロデューサー、コンシューマー）に応じたCeforeのFace/FIB設定
+# 
+services:
+  
+  r1:
+    # build:
+    #   # docker build コマンドを実行したときの、カレントなワーキングディレクトリ
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: debian-cefore-router
+    hostname: r1
+    environment:
+      - NODE_TYPE=router
+    volumes:
+      - type: bind
+        source: ./
+        target: /ws
+    tty: true
+    networks:
+      cefore_network:
+        ipv4_address: 172.18.0.11
+
+  # Webカメラのアクセス設定
+  p1:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: debian-cefore-router
+    hostname: p1
+    environment:
+      - NODE_TYPE=producer
+    volumes:
+      - type: bind
+        source: ./
+        target: /ws
+    tty: true
+    networks:
+      cefore_network:
+        ipv4_address: 172.18.0.21
+    devices:
+      - /dev/video0:/dev/video0
+
+  c1:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: debian-cefore-router
+    hostname: c1
+    environment:
+      - NODE_TYPE=consumer
+    volumes:
+      - type: bind
+        source: ./
+        target: /ws
+    tty: true
+    networks:
+      cefore_network:
+        ipv4_address: 172.18.0.31
+
+  c2:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: debian-cefore-router
+    hostname: c2
+    environment:
+      - NODE_TYPE=consumer
+    volumes:
+      - type: bind
+        source: ./
+        target: /ws
+    tty: true
+    networks:
+      cefore_network:
+        ipv4_address: 172.18.0.32
+
+networks:
+  cefore_network:
+    driver: bridge # カスタムブリッジネットワーク使用
+    ipam:
+      config:
+        - subnet: 172.18.0.0/24 # ネットワークのサブネット定義

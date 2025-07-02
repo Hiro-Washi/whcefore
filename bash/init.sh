@@ -10,3 +10,4 @@ sleep 1
 sudo csmgrdstart
 sleep 1
 sudo cefnetdstart
+echo "DO TEST: sudo cefputfile ccnx:/test -f Readme.md"

@@ -1,0 +1,5 @@
+unknown shorthand flag: 'n' in -n
+
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Run 'docker run --help' for more information
